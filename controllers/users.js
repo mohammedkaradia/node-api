@@ -5,6 +5,7 @@ const { validationResult } = require('express-validator');
 
 /* GET users listing. */
 exports.getUser = async (req,res,next) => {
+  console.log('Test')
   User.findAll()
   .then(usersData => {
     res.send(usersData);
