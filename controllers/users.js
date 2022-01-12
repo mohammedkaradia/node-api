@@ -10,6 +10,7 @@ exports.getUser = async (req,res,next) => {
     res.send(usersData);
   })
   .catch(err => {
+    console.log(err);
     res.send(err);
   })
 }
@@ -32,6 +33,7 @@ exports.getUserById = async (req, res, next) => {
 exports.postNewUser = async (req,res,next) => {
 
   console.log('test', req.body)
+  // console.log(req.query)
 
   const validationError = validationResult(req);
   if(!validationError.isEmpty()) {
@@ -39,18 +41,17 @@ exports.postNewUser = async (req,res,next) => {
   }
 
   await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    number: req.body.number,
-    utmSource: req.body.utmSource,
-    utmTerm: req.body.utmTerm,
-    utmMedium: req.body.utmMedium,
-    utmCampaign: req.body.utmCampaign,
-    utmDevice: req.body.utmDevice,
-    utmLocation: req.body.utmLocation,
+    name: req.body.quotename,
+    email: req.body.quoteemail,
+    number: req.body.quotetel,
+    utmSource: req.body.utm_source,
+    utmTerm: req.body.utm_term,
+    utmMedium: req.body.utm_medium,
+    utmCampaign: req.body.utm_campaign,
+    utmDevice: req.body.utm_device,
+    utmLocation: req.body.utm_loc,
   })
   .then(userData => {
-    console.log(userData);
     res.send(userData);
   })
   .catch(err => {

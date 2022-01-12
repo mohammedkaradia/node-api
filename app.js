@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const model = require('./models/index');
+const port = 4200;
+const sequelize = require('./utils/database');
 
 var app = express();
 
@@ -34,5 +37,14 @@ app.use(userRoutes);
 //   res.status(err.status || 500)
 //     .send('error');
 // });
+
+sequelize
+  .sync({
+	// force:true
+  })
+  .then(result=> {
+    //  app.listen(port);
+  })
+  .catch((err) => console.log(err));
 
 module.exports = app;
