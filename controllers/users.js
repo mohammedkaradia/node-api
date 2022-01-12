@@ -31,6 +31,8 @@ exports.getUserById = async (req, res, next) => {
 
 exports.postNewUser = async (req,res,next) => {
 
+  console.log('test', req.body)
+
   const validationError = validationResult(req);
   if(!validationError.isEmpty()) {
     return res.json('check your input detail');
@@ -48,9 +50,11 @@ exports.postNewUser = async (req,res,next) => {
     utmLocation: req.body.utmLocation,
   })
   .then(userData => {
+    console.log(userData);
     res.send(userData);
   })
   .catch(err => {
+    console.log(err);
     res.send(err);
   })
 } 
