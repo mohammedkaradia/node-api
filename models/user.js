@@ -1,31 +1,23 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  User.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    number: DataTypes.STRING,
-    utmSource: DataTypes.STRING,
-    utmTerm: DataTypes.STRING,
-    utmMedium: DataTypes.STRING,
-    utmCampaign: DataTypes.STRING,
-    utmDevice: DataTypes.STRING,
-    utmLocation: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
-  return User;
-};
+const Sequelize = require("sequelize");
+const sequelize = require("../utils/database");
+
+const UserEntity = sequelize.define("User", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  name: { type: Sequelize.STRING, allowNull: true },
+  email: { type: Sequelize.STRING, allowNull: true },
+  number: { type: Sequelize.BIGINT, allowNull: true },
+  utcSource: { type: Sequelize.STRING, allowNull: true },
+  utcTerm: { type: Sequelize.STRING, allowNull: true },
+  utcMedium: { type: Sequelize.STRING, allowNull: true },
+  utmCampaign: { type: Sequelize.STRING, allowNull: true },
+  utmDevice: { type: Sequelize.STRING, allowNull: true },
+  utmLocation: { type: Sequelize.STRING, allowNull: true },
+
+});
+
+module.exports = UserEntity;
