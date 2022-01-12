@@ -7,6 +7,7 @@ router.get('/users', userController.getUser);
 
 router.get('/users/:id', userController.getUserById);
 
-router.post('/users',  [check('email', "your custom error message").isEmail()], userController.postNewUser);
+router.post('/users',  [check('email', "your custom error message").isEmail(),
+                        check('number', "phone number not valid").isLength({ min: 10, max:10 })], userController.postNewUser);
 
 module.exports = router

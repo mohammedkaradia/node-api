@@ -33,6 +33,7 @@ exports.postNewUser = async (req,res,next) => {
 
   const validationError = validationResult(req);
   if(!validationError.isEmpty()) {
+    console.log(validationError);
     return res.json('check your input detail');
   }
 
