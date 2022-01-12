@@ -40,10 +40,10 @@ app.use(userRoutes);
 
 sequelize
   .sync({
-	 // force:true
+	// force:true
   })
   .then(result=> {
-      app.listen(port);
+    //  app.listen(port);
   })
   .catch((err) => console.log(err));
 

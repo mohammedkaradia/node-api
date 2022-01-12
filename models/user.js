@@ -11,12 +11,12 @@ const UserEntity = sequelize.define("User", {
   name: { type: Sequelize.STRING, allowNull: true },
   email: { type: Sequelize.STRING, allowNull: true },
   number: { type: Sequelize.BIGINT, allowNull: true },
-  utcSource: { type: Sequelize.STRING, allowNull: true },
-  utcTerm: { type: Sequelize.STRING, allowNull: true },
-  utcMedium: { type: Sequelize.STRING, allowNull: true },
-  utmCampaign: { type: Sequelize.STRING, allowNull: true },
-  utmDevice: { type: Sequelize.STRING, allowNull: true },
-  utmLocation: { type: Sequelize.STRING, allowNull: true },
+  utmSource: { type: Sequelize.STRING },
+  utmTerm: { type: Sequelize.STRING },
+  utmMedium: { type: Sequelize.STRING},
+  utmCampaign: { type: Sequelize.STRING},
+  utmDevice: { type: Sequelize.STRING },
+  utmLocation: { type: Sequelize.STRING },
 
 });
 
