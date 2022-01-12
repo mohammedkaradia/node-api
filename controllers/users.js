@@ -1,38 +1,56 @@
-var express = require('express');
-var router = express.Router();
 const { User } = require('../models')
+const { body } = require('express-validator/check')
+const { validationResult } = require('express-validator');
+
 
 /* GET users listing. */
-router.get('/', async function(req, res, next) {
- try {
-   const usersdata = await User.findAll()
-   res.send(usersdata)
- } catch (error) {
-   next(error)
- }
-});
+exports.getUser = async (req,res,next) => {
+  User.findAll()
+  .then(usersData => {
+    res.send(usersData);
+  })
+  .catch(err => {
+    res.send(err);
+  })
+}
 
-/* GET users by ID. */
-router.get('/:id', async function(req, res, next) {
-  try {
-    const {id} = req.params;
-    const userData = await User.findOne({where: {id:id}})
+exports.getUserById = async (req, res, next) => {
+  console.log('Hit')
+    await User.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(userData => {
     res.send(userData);
-  } catch (error) {
-    next(error)
+  })
+  .catch(err => {
+    res.send(err)
+  })  
+}
+
+exports.postNewUser = async (req,res,next) => {
+
+  const validationError = validationResult(req);
+  if(!validationError.isEmpty()) {
+    return res.json('check your input detail');
   }
- });
 
- /* POST users listing. */
-router.post('/addUser', async function(req, res, next) {
-  try {
-    const {body} = req;
-    const responseAdded = await User.create(body)
-    res.send(responseAdded)
-  } catch (error) {
-    next(error)
-  }
- });
-
-
-module.exports = router;
+  await User.create({
+    name: req.body.name,
+    email: req.body.email,
+    number: req.body.number,
+    utmSource: req.body.utmSource,
+    utmTerm: req.body.utmTerm,
+    utmMedium: req.body.utmMedium,
+    utmCampaign: req.body.utmCampaign,
+    utmDevice: req.body.utmDevice,
+    utmLocation: req.body.utmLocation,
+  })
+  .then(userData => {
+    res.send(userData);
+  })
+  .catch(err => {
+    res.send(err);
+  })
+} 
