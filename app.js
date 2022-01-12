@@ -1,50 +1,28 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const model = require('./models/index');
-const port = 4200;
-const sequelize = require('./utils/database');
+//#region IMPORTS
+const express = require("express");
+const model = require("./models/index");
+//#endregion
 
-var app = express();
-
-app.use(logger('dev'));
+//#region APP
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//#endregion
 
-//ROUTES 
-const userRoutes = require('./routes/user');
+//#region ROUTE
+const userRoutes = require("./routes/user");
 app.use(userRoutes);
+//#endregion
 
-
-
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-
-// // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//   // render the error page
-//   console.log(err);
-//   res.status(err.status || 500)
-//     .send('error');
-// });
-
+//#region Sync
+const sequelize = require("./utils/database");
+const port = 4200;
 sequelize
   .sync({
-	// force:true
+    // force:true
   })
-  .then(result=> {
-    //  app.listen(port);
+  .then((result) => {
+    app.listen(port);
   })
   .catch((err) => console.log(err));
-
-module.exports = app;
+//#endregion
