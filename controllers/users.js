@@ -7,9 +7,9 @@ const jwt = require("jsonwebtoken");
 /* GET users listing. */
 exports.getUser = async (req,res,next) => {
   console.log('Test')
-  const token = jwt.sign({},
-    'longsecretkeylongsecretkeylongsecretkey', { expiresIn: "1y" });
-  console.log(token)  
+  // const token = jwt.sign({},
+  //   'longsecretkeylongsecretkeylongsecretkey', { expiresIn: "1y" });
+  // console.log(token)  
   User.findAll()
   .then(usersData => {
     res.send(usersData);
