@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 /* GET users listing. */
 exports.getUser = async (req,res,next) => {
-  console.log('Test')
+  console.log(req.headers)
   const token = jwt.sign({},
     'longsecretkeylongsecretkeylongsecretkey', { expiresIn: "1y" });
   console.log(token)  
