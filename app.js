@@ -42,7 +42,7 @@ const sequelize = require("./utils/database");
 const port = 4200;
 sequelize
   .sync({
-    // force:true
+    force:true
   })
   .then((result) => {
     app.listen(port);
