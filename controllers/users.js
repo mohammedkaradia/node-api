@@ -1,11 +1,15 @@
 const { User } = require('../models')
 const { body } = require('express-validator/check')
 const { validationResult } = require('express-validator');
+const jwt = require("jsonwebtoken");
 
 
 /* GET users listing. */
 exports.getUser = async (req,res,next) => {
   console.log('Test')
+  const token = jwt.sign({},
+    'longsecretkeylongsecretkeylongsecretkey', { expiresIn: "1y" });
+  console.log(token)  
   User.findAll()
   .then(usersData => {
     res.send(usersData);
