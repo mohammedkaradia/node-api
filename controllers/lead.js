@@ -6,22 +6,16 @@ const jwt = require("jsonwebtoken");
 
 /* GET users listing. */
 exports.getUser = async (req,res,next) => {
-  console.log('Test')
-  // const token = jwt.sign({},
-  //   'longsecretkeylongsecretkeylongsecretkey', { expiresIn: "1y" });
-  // console.log(token)  
   User.findAll()
   .then(usersData => {
     res.send(usersData);
   })
   .catch(err => {
-    console.log(err);
     res.send(err);
   })
 }
 
 exports.getUserById = async (req, res, next) => {
-  console.log('Hit')
     await User.findOne({
     where: {
       id: req.params.id
@@ -37,12 +31,8 @@ exports.getUserById = async (req, res, next) => {
 
 exports.postNewUser = async (req,res,next) => {
 
-  console.log('test', req.body)
-  // console.log(req.query)
-
   const validationError = validationResult(req);
   if(!validationError.isEmpty()) {
-    console.log(validationError);
     return res.json('check your input detail');
   }
 
@@ -61,7 +51,6 @@ exports.postNewUser = async (req,res,next) => {
     res.send(userData);
   })
   .catch(err => {
-    console.log(err);
     res.send(err);
   })
 } 
